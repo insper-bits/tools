@@ -1,0 +1,38 @@
+import re
+
+# Define the valid command patterns
+valid_commands = [
+    r"push constant \d+",        # Matches 'push constant XXX' where XXX is a number
+    r"label \w+",                # Matches 'label XXX' where XXX is any word
+    r"if-goto \w+",              # Matches 'if-goto XXX' where XXX is any word
+    r"goto \w+",                 # Matches 'goto XXX' where XXX is any word
+    r"push temp [0-7]",          # Matches 'push temp 0 to 7'
+    r"pop temp [0-7]",           # Matches 'pop temp 0 to 7'
+    r"push argument \d+",        # Matches 'push argument XXX' where XXX is a number
+    r"add",                      # Matches 'add'
+    r"sub",                      # Matches 'sub'
+    r"neg",                      # Matches 'neg'
+    r"not",                      # Matches 'not'
+    r"and",                      # Matches 'and'
+    r"or",                       # Matches 'or'
+    r"eq",                       # Matches 'eq'
+    r"gt",                       # Matches 'gt'
+    r"lt",                       # Matches 'lt'
+    r"function \w+ \d+",         # Matches 'function STRING XXX' where STRING is a word and XXX is a number
+    r"call \w+ \d+"              # Matches 'call STRING XXX' where STRING is a word and XXX is a number
+]
+
+def is_valid_command(command):
+    """Check if the command matches one of the valid patterns."""
+    for pattern in valid_commands:
+        if re.fullmatch(pattern, command.strip()):
+            return True
+    return False
+
+def validate_file(file_path):
+    """Validate the file to ensure all commands are valid."""
+    with open(file_path, 'r') as file:
+        for line_number, line in enumerate(file, start=1):
+            if not is_valid_command(line):
+                return False, f"Invalid command at line {line_number}: {line.strip()}"
+    return True, ""
