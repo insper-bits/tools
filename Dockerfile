@@ -13,7 +13,7 @@ RUN apt-get update && \
 RUN git clone https://github.com/insper-bits/tools.git 
 
 # Install Python dependencies from requirements.txt if it exists
-RUN if [ -f requirements.txt ]; then pip install -r tools/requirements.txt; fi
+RUN pip install -r tools/requirements.txt
 
 # Set entrypoint to sh for minimal shell
 ENTRYPOINT ["/bin/sh"]
