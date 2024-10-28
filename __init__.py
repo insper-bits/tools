@@ -4,11 +4,11 @@ import click
 import sys
 import os.path
 import shutil
-from sw.assembler.ASM import ASM
-from sw.vmtranslator.VMTranslate import VMTranslate
-from util.toMIF import toMIF
-from util.programFPGA import programCDF, programROM
-from hw.hw_util import rom_init_from_hack, ram_test, mem_dump_file
+from .sw.assembler.ASM import ASM
+from .sw.vmtranslator.VMTranslate import VMTranslate
+from .util.toMIF import toMIF
+from .util.programFPGA import programCDF, programROM
+from .hw.hw_util import rom_init_from_hack, ram_test, mem_dump_file
 
 
 def getName(nasm):
